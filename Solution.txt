@@ -1,0 +1,902 @@
+ 
+
+
+
+Ex:02
+
+a.	Blank
+Insert  Data  
+--  Creating  the  `employee`  table
+CREATE  TABLE  employee  (
+        employee_name  VARCHAR(50),
+        street  VARCHAR(50),
+        city  VARCHAR(50)
+);
+
+--  Creating  the  `works`  table
+CREATE  TABLE  works  (
+        employee_name  VARCHAR(50),
+        company_name  VARCHAR(50),
+        salary  INT
+);
+
+--  Inserting  the  data
+INSERT  INTO  employee  (employee_name,  street,  city)  VALUES
+('Arif',  '51  upashahar',  'Rajshahi'),
+('Sumon',  '52  east',  'Moynamati'),
+('Sagor',  'Neemgachhi',  'Sirajgong'),
+('Abdul',  'Binodpur',  'Rajshahi'),
+('Himesh',  'Nazrul  avenue',  'Dhaka'),
+('Amirul',  'Chawk  bazar',  'Sylhet'),
+('Sajib',  '99  north',  'Chittagong');
+
+INSERT  INTO  works  (employee_name,  company_name,  salary)  VALUES
+('Sumon',  'Agrani',  12000),
+('Abdul',  'Sonali',  13000),
+('Himesh',  'Agrani',  6000),
+('Amirul',  'Sonali',  20000),
+('Sagor',  'Sonali',  8000),
+('Arif',  'Janata',  13000),
+('Sajib',  'Janata',  9000);
+
+
+
+b.	Find  the  names  of  all  employees  who  live  in  Rajshahi  city
+SELECT  employee_name
+FROM  employee
+WHERE  city  =  'Rajshahi';
+
+Ans:  Abdul  ,Arif
+c.	Find  the  names  and  street  addresses  of  all  employees  who  live  in  Rajshahi  city
+SELECT  employee_name,  street
+FROM  employee
+WHERE  city  =  'Rajshahi';
+
+Abdul	Binodpur
+Arif	51  upashahar
+
+d.	Find  the  names  of  all  employees  who  work  for  Sonali,  Agrani,  and  Janata
+For  ALL:  
+SELECT  employee_name
+FROM  works
+WHERE  company_name  IN  ('Sonali',  'Agrani',  'Janata');
+
+(i)SELECT  employee_name
+FROM  works
+WHERE  company_name  =  ‘Sonali’;
+(ii)SELECT  employee_name
+FROM  works
+WHERE  company_name  =  ‘Agrani;
+
+(iii)SELECT  employee_name
+FROM  works
+WHERE  company_name  =  ‘Janata’;
+
+e.	Find  the  names  and  salary  of  all  employees  who  work  for  Sonali,  Agrani,  and  Janata
+SELECT  employee_name,  salary
+FROM  works
+WHERE  company_name  IN  ('Sonali',  'Agrani',  'Janata');
+
+(i)SELECT  employee_name,salary
+FROM  works
+WHERE  company_name  =  ‘Sonali’;
+
+(ii)SELECT  employee_name,salary
+FROM  works
+WHERE  company_name  =  ‘Agrani;
+
+(iii)SELECT  employee_name,salary
+FROM  works
+WHERE  company_name  =  ‘Janata’;
+
+f.	Find  the  names  of  all  employees  whose  salary  is  (i)  12000  (ii)  >=12000  (iii)  <12000
+--  i.  Salary  is  12000
+
+SELECT  employee_name
+FROM  works
+WHERE  salary  =  12000;
+
+--  ii.  Salary  is  >=  12000
+SELECT  employee_name
+FROM  works
+WHERE  salary  >=  12000;
+
+--  iii.  Salary  is  <  12000
+SELECT  employee_name
+FROM  works
+WHERE  salary  <  12000;
+g.	Find  the  names  and  company  of  all  employees  whose  salary  is  (i)  12000  (ii)  >=12000  (iii)  <12000
+sql
+Copy  code
+--  i.  Salary  is  12000
+SELECT  employee_name,  company_name
+FROM  works
+WHERE  salary  =  12000;
+
+--  ii.  Salary  is  >=  12000
+SELECT  employee_name,  company_name
+FROM  works
+WHERE  salary  >=  12000;
+
+--  iii.  Salary  is  <  12000
+SELECT  employee_name,  company_name
+FROM  works
+WHERE  salary  <  12000;
+h.	Find  the  names,  streets,  and  cities  of  all  employees  who  work  for  Agrani
+SELECT  e.employee_name,  e.street,  e.city
+FROM  employee  e
+JOIN  works  w  ON  e.employee_name  =  w.employee_name
+WHERE  w.company_name  =  'Agrani';
+
+employee_name
+street
+city
+
+Himesh	Nazrul  avenue	Dhaka	
+Sumon	52  east	Moynamati	
+
+i.	Find  the  names,  streets,  and  cities  of  all  employees  who  earn  >=10000
+SELECT  e.employee_name,  e.street,  e.city
+FROM  employee  e
+JOIN  works  w  ON  e.employee_name  =  w.employee_name
+WHERE  w.salary  >=  10000;
+j.	Find  the  names,  company,  and  salary  of  all  employees  who  live  in  Rajshahi  city
+SELECT  w.employee_name,  w.company_name,  w.salary
+FROM  works  w
+JOIN  employe  e  ON  e.employee_name  =  w.employee_name
+WHERE  e.city  =  'Rajshahi';
+
+employee_name
+company_name
+salary
+
+Abdul	Sonali	13000	
+Arif	Janata	13000	
+
+k.	Find  the  names,  streets,  cities,  and  companies  of  all  employees  who  earn  >=10000
+SELECT  e.employee_name,  e.street,  e.city,  w.company_name
+FROM  employee  e
+JOIN  works  w  ON  e.employee_name  =  w.employee_name
+WHERE  w.salary  >=  10000;
+l.	Find  the  names,  streets,  and  cities  of  all  employees  who  work  for  Sonali  and  earn  more  than  12000
+SELECT  e.employee_name,  e.street,  e.city
+FROM  employee  e
+JOIN  works  w  ON  e.employee_name  =  w.employee_name
+WHERE  w.company_name  =  'Sonali'  AND  w.salary  >  12000;
+	
+employee_name
+street
+city
+
+Abdul	Binodpur	Rajshahi	
+Amirul	Chawk  bazar	Sylhet	
+
+m.	Find  all  employees  in  the  database  who  do  not  work  for  Sonali  Bank
+SELECT  e.employee_name
+FROM  employee  e
+JOIN  works  w  ON  e.employee_name  =  w.employee_name
+WHERE  w.company_name  !=  'Sonali';
+Alternative: 
+SELECT employee_name
+FROM works
+WHERE company_name !='Sonali';
+n.	Modify  the  database  so  that  “Arif”  now  lives  in  Natore
+UPDATE  employee
+SET  city  =  'Natore'
+WHERE  employee_name = 'Arif';
+o.	Give  all  employees  of  “Agrani”  Bank  a  10  percent  salary  raise
+UPDATE  works
+SET  salary  =  salary  *  1.10
+WHERE  company_name  =  'Agrani';
+p.	Delete  all  records  for  Sagor  in  the  employee  table
+DELETE  FROM  employee
+WHERE  employee_name  =  'Sagor';
+q.	Add  a  column  manager  in  the  works  table
+ALTER  TABLE  works
+ADD  COLUMN  manager  VARCHAR(50);
+ 
+
+Example  03:  Insurance  Database
+a)  Insert  the  data:  (Similar  to  Example  02,  use  appropriate  INSERT  INTO  queries.)
+b)  Find  the  names  of  all  people  who  live  in  Rajshahi:
+
+
+SELECT  name  FROM  person  WHERE  address  =  'Rajshahi';
+Result:  Arif,  Abdul
+c)  Which  model  was  sold  in  2013:
+
+
+SELECT  model  FROM  car  WHERE  year  =  2013;
+Result:  Axio,  Premio
+d)  Find  the  name  of  those  drivers  where  the  damage  amount  is  between  10000  and  15000:
+
+
+SELECT  driver  
+FROM  accident  
+WHERE  damage_amount  BETWEEN  10000  AND  15000;
+Result:  Arif,  Bahadur
+e)  Find  the  national  ID  (nid)  of  those  who  own  Axio:
+
+
+SELECT  nid  
+FROM  owns
+JOIN  car  ON  owns.license  =  car.license  
+WHERE  car.model  = 'Axio';
+Result:  123451,  123453
+f)  Find  the  name  and  address  of  those  who  own  Alto:
+SELECT  person.name,  person.address  
+FROM  person  
+JOIN  owns  ON  person.nid  =  owns.nid  
+JOIN  car  ON  owns.license  =  car.license  
+WHERE  car.model  =  'Alto';
+Result:  Amirul,  Sylhet
+g)  Who  was  the  driver  involved  in  the  accident  on  20/12/2011:
+
+SELECT  driver  
+FROM  accident  
+WHERE  date  =  '20/12/2011';
+Result:  Abdul
+h)  Who  was  the  owner  of  the  car  with  license  12-4000:
+
+
+SELECT name
+FROM  person
+JOIN owns ON person.nid=owns.nid
+WHERE  owns.license  =  '12-4000';
+Result:  Sagor
+i)  Who  was  the  owner  of  the  car  whose  driver  is  Arif:
+
+
+SELECT  name
+FROM  person
+JOIN  log  ON  owns.license  =  log.license  
+JOIN owns ON owns.nid=person.nid
+WHERE  log.driver  =  'Arif';
+Result:  123451,  123456,  123457
+j)  Which  car  was  involved  in  the  accident  on  19/09/2015:
+
+
+SELECT  model
+FROM car
+JOIN log ON car.license=log.license
+WHERE  log.date  =  '19/09/2015';
+Result:  11-6000
+k)  Find  the  number  of  accidents  in  which  cars  belonging  to  Arif  were  involved:
+SELECT  COUNT(*)  
+FROM  accident  
+WHERE driver=’Arif’
+Result:  3
+l)  Find  the  dates  of  accidents  in  which  cars  belonging  to  Arif  were  involved:
+
+
+SELECT  date  
+FROM  accident 
+Where driver=’Arif’;
+Result:  12/01/2013,  15/05/2013,  20/08/2014
+m)  Modify  the  database  so  that  “Arif”  now  lives  in  Natore:
+UPDATE  person 
+SET  address  =  'Natore'  
+WHERE  name  =  'Arif';
+________________________________________
+ 
+Example  04:  Comprehensive  Employee  and  Company  Database________________________________________
+Schema  Recap:
+1.	employee(employee-name,  street,  city)
+2.	works(employee-name,  company-name,  salary)
+3.	company(company-name,  city)
+4.	manages(employee-name,  manager-name)
+a)  Insert  the  data:
+
+
+--  Employee  Table
+INSERT  INTO  employee  (employee_name,  street,  city)
+VALUES  
+('Arif',  '51  upashahar',  'Rajshahi'),
+('Sumon',  '52  east',  'Moynamati'),
+('Sagor',  'Neemgachhi',  'Sirajgong'),
+('Abdul',  'Binodpur',  'Rajshahi'),
+('Himesh',  'Nazrul  avenue',  'Dhaka'),
+('Amirul',  'Chawk  bazar',  'Sylhet'),
+('Sajib',  '99  north',  'Chittagong');
+
+--  Works  Table
+INSERT  INTO  works  (employee_name,  company_name,  salary)
+VALUES  
+('Sumon',  'Agrani',  12000),
+('Abdul',  'Sonali',  13000),
+('Himesh',  'Agrani',  6000),
+('Amirul',  'Sonali',  20000),
+('Sagor',  'Sonali',  8000),
+('Arif',  'Janata',  13000),
+('Sajib',  'Janata',  9000);
+
+--  Manages  Table
+INSERT  INTO  manages  (employee_name,  manager_name)
+VALUES  
+('Amirul',  'Amirul'),
+('Abdul',  'Amirul'),
+('Sagor',  'Amirul'),
+('Sumon',  'Sumon'),
+('Himesh',  'Sumon'),
+('Arif',  'Arif'),
+('Sajib',  'Arif');
+
+--Company  Table
+INSERT  INTO  company  (company_name,city)
+VALUES  
+('Agrani',  'Rajshahi'),
+('Sonali',  'Sylhet'),
+('Janata','Dhaka');
+Queries  and  Modifications
+
+
+
+CREATE  TABLE  works
+(  employee_name  Varchar(200)  ,
+  street  Varchar(200),
+  city  Varchar(200),
+  FOREIGN  KEY  employee_name  REFERENCES  employee(employee_name)
+  )
+  
+
+
+2.  Find  the  names  of  all  employees  who  work  for  Sonali  Bank:
+
+
+SELECT  employee_name  
+FROM  works  
+WHERE  company_name  =  'Sonali';
+Result:  Abdul,  Amirul,  Sagor
+________________________________________
+3.  Find  the  names,  streets,  and  cities  of  all  employees  who  work  for  Agrani  Bank:
+
+
+SELECT employee.employee_name, employee.street, employee.city
+FROM employee
+NATURAL JOIN works
+WHERE works.company_name = 'Agrani';
+
+
+
+Alternative:
+
+SELECT  employee.employee_name,  employee.street,  employee.city  
+FROM  employee  
+JOIN  works  ON  employee.employee_name  =  works.employee_name  
+WHERE  works.company_name  =  'Agrani';
+
+
+Alternative:  
+SELECT  e.employee_name,e.street,e.city
+FROM  employee  AS  e
+JOIN  works  AS  w  ON  e.employee_name  =  w.employee_name
+WHERE  company_name='Agrani';
+Result:
+Sumon  (52  east,  Moynamati)
+Himesh  (Nazrul  avenue,  Dhaka)
+________________________________________
+4.  Find  the  names,  streets,  and  cities  of  all  employees  who  work  for  Sonali  Bank  and  earn  more  than  120000  per  annum  (i.e.,  >10000  per  month):
+
+
+SELECT  employee.employee_name,  employee.street,  employee.city  
+FROM  employee  
+JOIN  works  ON  employee.employee_name  =  works.employee_name  
+WHERE  works.company_name  =  'Sonali'  AND  works.salary  >  10000;
+
+Alternate:  SELECT  e.employee_name  ,  e.street  ,  e.city
+FROM  employee  AS  e
+JOIN  works  AS  w  
+ON  w.employee_name=e.employee_name
+WHERE  company_name='Sonali'  and  salary>=  10000]
+Result:
+Abdul  (Binodpur,  Rajshahi)
+Amirul  (Chawk  bazar,  Sylhet)
+________________________________________
+5.  Find  all  employees  who  live  in  the  same  cities  as  the  companies  for  which  they  work: ()
+
+
+SELECT  employee.employee_name  
+FROM  employee  
+JOIN  works  ON  employee.employee_name  =  works.employee_name  
+JOIN  company  ON  works.company_name  =  company.company_name  
+WHERE  employee.city  =  company.city;
+Alternative:
+
+SELECT employee.employee_name
+FROM employee
+NATURAL JOIN works
+NATURAL JOIN company
+WHERE employee.city=company.city;
+
+
+Result:  Arif,  Abdul
+________________________________________
+6.  Find  all  employees  who  live  in  the  same  cities  and  on  the  same  streets  as  do  their  managers:
+
+SELECT e.employee_name
+FROM employee e
+JOIN manages m ON e.employee_name=m.employee_name
+JOIN employee e2 ON e2.employee_name=m.manager_name
+WHERE e.street=e2.street AND e.city=e2.city
+employee_name
+street
+city
+employee_name
+manager_name
+employee_name
+street
+city
+
+Amirul	Chawk bazar	Sylhet	Amirul	Amirul	Amirul	Chawk bazar	Sylhet	
+Arif	51 upashahar	Rajshahi	Arif	Arif	Arif	51 upashahar	Rajshahi	
+Sumon	52 east	Moynamati	Sumon	Sumon	Sumon	52 east	Moynamati	
+________________________________________
+7.  Find  all  employees  in  the  database  who  do  not  work  for  Sonali  Bank:
+
+
+SELECT  employee_name  
+FROM  works  
+WHERE  company_name  !=  'Sonali';
+Result:  Sumon,  Himesh,  Arif,  Sajib
+________________________________________
+8.  Find  all  employees  who  earn  more  than  each  employee  of  Janata  Bank:
+SELECT works.employee_name
+FROM works
+WHERE works.salary>
+
+(SELECT MAX(works.salary)
+FROM works
+WHERE works.company_name='Janata')
+
+Result:  Amirul
+________________________________________
+9.  Find  all  employees  who  earn  more  than  the  average  salary  of  all  employees  of  their  company:
+SELECT employee_name
+FROM works w
+WHERE w.salary >
+
+(SELECT AVG(w2.salary)
+ FROM works w2
+ WHERE w2.company_name=w.company_name
+)
+
+
+Result:  Amirul  (Sonali),  Arif  (Janata),Sumon
+________________________________________
+10.  Find  the  company  that  has  the  most  employees:
+
+
+SELECT company_name
+FROM works
+GROUP BY company_name
+ORDER BY COUNT(employee_name) DESC
+LIMIT 1;
+Result:  Sonali
+________________________________________
+11.  Find  the  company  that  has  the  smallest  payroll:
+
+
+SELECT  company_name  
+FROM  works  
+GROUP  BY  company_name  
+ORDER  BY  SUM(salary)  ASC  
+LIMIT  1;
+Result:  Agrani
+________________________________________
+12.  Find  those  companies  whose  employees  earn  a  higher  salary  on  average  than  the  average  salary  at  Agrani  Bank:
+
+
+SELECT  company_name  
+FROM  works  
+GROUP  BY  company_name  
+HAVING  AVG(salary)  >  (SELECT  AVG(salary)  FROM  works  WHERE  company_name  =  'Agrani');
+Result:  Sonali,  Janata
+________________________________________
+13.  Modify  the  database  so  that  “Arif”  now  lives  in  Natore:
+
+
+UPDATE  employee  SET  city  =  'Natore'  WHERE  employee_name  =  'Arif';
+________________________________________
+14.  Give  all  employees  of  Agrani  Bank  a  10%  salary  raise:
+
+
+UPDATE  works  
+SET  salary  =  salary  *  1.10  
+WHERE  company_name  =  'Agrani';
+________________________________________
+15.  Give  all  managers  of  Agrani  Bank  a  10%  salary  raise:
+
+
+UPDATE works
+SET salary=salary*1
+WHERE employee_name IN(
+ SELECT manager_name
+ FROM (
+    SELECT DISTINCT manager_name
+    FROM manages
+    NATURAL JOIN works
+    WHERE company_name='Agrani')
+    	AS temp_table
+ );________________________________________
+16.  Give  all  managers  a  10%  salary  raise  unless  their  salary  becomes  greater  than  19000;  in  such  cases  give  only  a  3%  salary  raise:
+
+
+UPDATE  works  
+SET  salary  =  CASE  
+        WHEN  salary  *  1.10  >  19000  THEN  salary  *  1.03  
+        ELSE  salary  *  1.10  
+END
+WHERE  employee_name  IN  
+
+(SELECT  manager_name  FROM  manages);
+________________________________________
+17.  Delete  all  tuples  in  the  works  relation  for  employees  of  Janata  Bank:
+
+
+DELETE  
+FROM  works  
+WHERE  company_name  =  'Janata';
+________________________________________
+18.  Define  a  view  consisting  of  manager_name  and  the  average  salary  of  all  employees  who  work  for  that  manager.  Now,  try  to  modify  that  view:
+
+
+--  Create  the  view
+CREATE  VIEW  manager_avg_salary  AS  
+SELECT  manages.manager_name,  AVG(works.salary)  AS  avg_salary  
+FROM  manages  
+JOIN  works  ON  manages.employee_name  =  works.employee_name  
+GROUP  BY  manages.manager_name;
+
+--  Attempt  to  modify  the  view  (which  will  generally  not  be  allowed  in  most    systems)
+UPDATE  manager_avg_salary  SET  avg_salary  =  15000  WHERE  manager_name  =  'Sumon';
+
+Example 05:
+Database Management System
+
+A relational database Schema for LIBRARY database is given below.
+
+
+
+
+
+
+
+
+
+
+
+Perform the following Queries on the Database
+1.	How many copies of the book titled DBMS are owned by the library branch whose name is “CSE Seminar library”?
+2.	How many copies of the book titled DBMS are owned by each library branch?
+3.	Retrieve the names of all borrowers who do not have any books checked out?
+4.	For each book that is loaned out from the “CSE seminar library” branch and whose DueDate is today, retrieve the book title, the borrower’s name, and the borrower’s address.
+5.	For each library branch, retrieve the branch name and the total number of books loaned out from that branch.
+6.	Retrieve the names, addresses, and number of books checked out for all borrowers who have more than two books checked out.  
+7.	For each book authored by “Ivan BayRoss”, retrieve the title and the no. of copies owned by the library branch whose name is “RU central library”.
+
+
+Book		Book_Author
+BookId	Title	PublisherName		BookId	AuthorName
+100.001cn	Computer Network	PHI		100.001cn	A S Tanenbaum
+100.002dsc	Database System	Tata		100.002dsc	Silberschatz
+100.003ds	Digital System	PHI		100.003ds	Ronald J Tocci
+100.004db	DBMS	PHI		100.004db	Ivan Bayross
+100.005ora	Oracle 2000	Galgotia		100.005ora	Ivan Bayross
+
+Publisher
+Name	Address	Phone
+PHI	20 Delhi Super Market	01715-454678
+Tata	North Kolkata	0156-2345445
+Galgotia	Mumbai	0192-203490
+
+
+Book_Copies		Library_Branch
+BookId	BranchId	No_Of_Copies		BranchId	BranchName	Address
+100.001cn	1001	2		1001	CSE Seminar Library	Rajshahi
+100.001cn	1002	5		1002	RU Central Library	Rajshahi
+100.002dsc	1001	3		1003	DU Central Library	Dhaka
+100.002dsc	1002	4		
+100.003ds	1001	3		Borrower
+100.003ds	1003	5		CardNo	Name	Address	Phone
+100.004db	1001	2		10001	Saidur	CSE	01714-400567
+100.004db	1002	5		10002	Rafiq	PHYSICS	0194-300456
+100.005ora	1001	2		10003	Masud	CSE	0156-345678
+100.005ora	1002	7		10004	Nobir	ICT	01199-203456
+
+BOOK_LOAN
+BookId	BranchId	CardNo	DateOut	DueDate
+100.001cn	1001	10001	15-Jan-15	15-Feb-15
+100.001cn	1002	10002	25-Jan-15	25-Feb-15
+100.002dsc	1001	10003	20-Feb-15	20-Mar-15
+100.002dsc	1002	10004	15-Mar-15	15-Apr-15
+100.003ds	1001	10001	07-Jun-15	07-Jul-15
+100.003ds	1003	10002	15-Oct-15	15-Nov-15
+100.004db	1001	10003	25-Oct-15	25-Nov-15
+100.004db	1002	10004	15-Nov-15	15-Dec-15
+100.005ora	1001	10003	22-Dec-15	22-Jan-16
+100.005ora	1002	10001	25-Dec-15	25-Jan-16
+ 
+Example 5________________________________________
+CREATE TABLE Publisher (
+    Name VARCHAR(100) PRIMARY KEY,
+    Address VARCHAR(200),
+    Phone VARCHAR(15)
+);
+
+
+CREATE TABLE Book (
+    BookId VARCHAR(50) PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    PublisherName VARCHAR(100) NOT NULL,
+    FOREIGN KEY (PublisherName) REFERENCES Publisher(Name)
+);
+
+
+
+CREATE TABLE Book_Author (
+    BookId VARCHAR(50),
+    AuthorName VARCHAR(100),
+    PRIMARY KEY (BookId, AuthorName),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId)
+);
+
+CREATE TABLE Library_Branch (
+    BranchId INT PRIMARY KEY,
+    BranchName VARCHAR(100),
+    Address VARCHAR(200)
+);
+
+CREATE TABLE Borrower (
+    CardNo INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Address VARCHAR(200),
+    Phone VARCHAR(15)
+);
+
+CREATE TABLE Book_Copies (
+    BookId VARCHAR(50),
+    BranchId INT,
+    No_Of_Copies INT,
+    PRIMARY KEY (BookId, BranchId),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId),
+    FOREIGN KEY (BranchId) REFERENCES Library_Branch(BranchId)
+);
+
+CREATE TABLE Book_Loan (
+    BookId VARCHAR(50),
+    BranchId INT,
+    CardNo INT,
+    DateOut DATE,
+    DueDate DATE,
+    PRIMARY KEY (BookId, BranchId, CardNo),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId),
+    FOREIGN KEY (BranchId) REFERENCES Library_Branch(BranchId),
+    FOREIGN KEY (CardNo) REFERENCES Borrower(CardNo)
+);
+
+
+1. Book Table
+CREATE TABLE Book (
+    BookId VARCHAR(50) PRIMARY KEY,
+    Title VARCHAR(100) NOT NULL,
+    PublisherName VARCHAR(100) NOT NULL,
+    FOREIGN KEY (PublisherName) REFERENCES Publisher(Name)
+);
+________________________________________
+2. Book_Author Table
+CREATE TABLE Book_Author (
+    BookId VARCHAR(50),
+    AuthorName VARCHAR(100),
+    PRIMARY KEY (BookId, AuthorName),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId)
+);
+________________________________________
+3. Publisher Table
+CREATE TABLE Publisher (
+    Name VARCHAR(100) PRIMARY KEY,
+    Address VARCHAR(200),
+    Phone VARCHAR(15)
+);
+________________________________________
+4. Book_Copies Table
+CREATE TABLE Book_Copies (
+    BookId VARCHAR(50),
+    BranchId INT,
+    No_Of_Copies INT,
+    PRIMARY KEY (BookId, BranchId),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId),
+    FOREIGN KEY (BranchId) REFERENCES Library_Branch(BranchId)
+);
+________________________________________
+5. Library_Branch Table
+CREATE TABLE Library_Branch (
+    BranchId INT PRIMARY KEY,
+    BranchName VARCHAR(100),
+    Address VARCHAR(200)
+);
+________________________________________
+6. Borrower Table
+CREATE TABLE Borrower (
+    CardNo INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Address VARCHAR(200),
+    Phone VARCHAR(15)
+);
+________________________________________
+7. Book_Loan Table
+CREATE TABLE Book_Loan (
+    BookId VARCHAR(50),
+    BranchId INT,
+    CardNo INT,
+    DateOut DATE,
+    DueDate DATE,
+    PRIMARY KEY (BookId, BranchId, CardNo),
+    FOREIGN KEY (BookId) REFERENCES Book(BookId),
+    FOREIGN KEY (BranchId) REFERENCES Library_Branch(BranchId),
+    FOREIGN KEY (CardNo) REFERENCES Borrower(CardNo)
+);
+________________________________________
+Relationships Summary:
+•	Book references Publisher (via PublisherName).
+•	Book_Author references Book.
+•	Book_Copies references Book and Library_Branch.
+•	Book_Loan references Book, Library_Branch, and Borrower.
+
+ 	1. Publisher Table
+sql
+Copy code
+INSERT INTO Publisher (Name, Address, Phone)
+VALUES
+    ('PHI', '20 Delhi Super Market', '01715-454678'),
+    ('Tata', 'North Kolkata', '0156-2345445'),
+    ('Galgotia', 'Mumbai', '0192-203490');
+________________________________________
+2. Book Table
+sql
+Copy code
+INSERT INTO Book (BookId, Title, PublisherName)
+VALUES
+    ('100.001cn', 'Computer Network', 'PHI'),
+    ('100.002dsc', 'Database System', 'Tata'),
+    ('100.003ds', 'Digital System', 'PHI'),
+    ('100.004db', 'DBMS', 'PHI'),
+    ('100.005ora', 'Oracle 2000', 'Galgotia');
+________________________________________
+3. Book_Author Table
+sql
+Copy code
+INSERT INTO Book_Author (BookId, AuthorName)
+VALUES
+    ('100.001cn', 'A S Tanenbaum'),
+    ('100.002dsc', 'Silberschatz'),
+    ('100.003ds', 'Ronald J Tocci'),
+    ('100.004db', 'Ivan Bayross'),
+    ('100.005ora', 'Ivan Bayross');
+________________________________________
+4. Library_Branch Table
+sql
+Copy code
+INSERT INTO Library_Branch (BranchId, BranchName, Address)
+VALUES
+    (1001, 'CSE Seminar Library', 'Rajshahi'),
+    (1002, 'RU Central Library', 'Rajshahi'),
+    (1003, 'DU Central Library', 'Dhaka');
+________________________________________
+5. Book_Copies Table
+sql
+Copy code
+INSERT INTO Book_Copies (BookId, BranchId, No_Of_Copies)
+VALUES
+    ('100.001cn', 1001, 2),
+    ('100.001cn', 1002, 5),
+    ('100.002dsc', 1001, 3),
+    ('100.002dsc', 1002, 4),
+    ('100.003ds', 1001, 3),
+    ('100.003ds', 1003, 5),
+    ('100.004db', 1001, 2),
+    ('100.004db', 1002, 5),
+    ('100.005ora', 1001, 2),
+    ('100.005ora', 1002, 7);
+________________________________________
+6. Borrower Table
+sql
+Copy code
+INSERT INTO Borrower (CardNo, Name, Address, Phone)
+VALUES
+    (10001, 'Saidur', 'CSE', '01714-400567'),
+    (10002, 'Rafiq', 'PHYSICS', '0194-300456'),
+    (10003, 'Masud', 'CSE', '0156-345678'),
+    (10004, 'Nobir', 'ICT', '01199-203456');
+________________________________________
+7. Book_Loan Table
+sql
+Copy code
+INSERT INTO Book_Loan (BookId, BranchId, CardNo, DateOut, DueDate)
+VALUES
+    ('100.001cn', 1001, 10001, '2015-01-15', '2015-02-15'),
+    ('100.001cn', 1002, 10002, '2015-01-25', '2015-02-25'),
+    ('100.002dsc', 1001, 10003, '2015-02-20', '2015-03-20'),
+    ('100.002dsc', 1002, 10004, '2015-03-15', '2015-04-15'),
+    ('100.003ds', 1001, 10001, '2015-06-07', '2015-07-07'),
+    ('100.003ds', 1003, 10002, '2015-10-15', '2015-11-15'),
+    ('100.004db', 1001, 10003, '2015-10-25', '2015-11-25'),
+    ('100.004db', 1002, 10004, '2015-11-15', '2015-12-15'),
+    ('100.005ora', 1001, 10003, '2015-12-22', '2016-01-22'),
+    ('100.005ora', 1002, 10001, '2015-12-25', '2016-01-25');
+________________________________________
+These SQL statements create the database structure and populate it with the data. Let me know if you need additional queries or modifications!
+-
+
+•  How many copies of the book titled DBMS are owned by the library branch named "CSE Seminar Library"?
+Query:
+SELECT SUM(bc.no_of_Copies)
+FROM book_copies AS bc
+NATURAL JOIN book as b
+NATURAL JOIN library_branch as lb
+WHERE lb.BranchName='CSE Seminar Library' AND b.Title='DBMS';
+
+•  How many copies of the book titled DBMS are owned by each library branch?
+Query:
+
+
+SELECT lb.BranchName,b.Title,bc.no_of_Copies
+FROM book_copies AS bc
+NATURAL JOIN book as b
+NATURAL JOIN library_branch as lb
+WHERE b.Title='DBMS';
+
+Alternative: 
+SELECT lb.BranchName,b.Title,SUM(bc.no_of_Copies)
+FROM book_copies AS bc
+NATURAL JOIN book as b
+NATURAL JOIN library_branch as lb
+WHERE b.Title='DBMS'
+GROUP BY lb.BranchName;
+•  Retrieve the names of all borrowers who do not have any books checked out.
+Query:
+SELECT Name
+FROM Borrower
+WHERE CardNo NOT IN (SELECT CardNo FROM Book_Loan);	
+
+
+Alternative: 
+
+SELECT br.Name
+FROM borrower as br
+LEFT JOIN book_loan as bl ON br.CardNo=bl.CardNo
+WHERE bl.BookId IS NULL;
+•  For each book loaned out from the “CSE Seminar Library” branch and whose DueDate is today, retrieve the book title, borrower’s name, and the borrower’s address.
+Query:
+
+SELECT b.title, br.Name,br.Address,br.Phone
+FROM Borrower as br
+JOIN book_loan as bl ON br.CardNo=bl.CardNo
+JOIN library_branch as lb ON lb.BranchId=bl.BranchId
+JOIN book as b ON b.BookId=bl.BookId
+WHERE lb.BranchName='CSE Seminar Library' AND bl.DueDate='2015-02-15';
+
+•  For each library branch, retrieve the branch name and the total number of books loaned out from that branch.
+Query:
+SELECT lb.branchname , sum(bc.no_of_copies)
+FROM library_branch as lb
+NATURAL JOIN book_copies as bc
+GROUP BY lb.branchName;
+•  Retrieve the names, addresses, and number of books checked out for all borrowers who have more than two books checked out.
+Query:
+SELECT br.Name,br.Address,br.Phone
+FROM borrower as br
+NATURAL JOIN book_loan as bl
+GROUP BY bl.CardNo
+HAVING COUNT(bl.CardNo)>2;
+•  For each book authored by “Ivan BayRoss,” retrieve the title and the number of copies owned by the library branch named “RU Central Library.”
+Query:
+
+
+SELECT b.Title , SUM(bc.no_of_copies)
+FROM Book as b
+JOIN book_author as ba ON b.BookId=ba.BookId
+JOIN book_copies as bc ON bc.BookId=ba.BookId
+JOIN library_branch as lb ON bc.BranchId=lb.BranchId
+WHERE ba.AuthorName='Ivan Bayross' AND lb.BranchName='RU Central Library'
+GROUP BY bc.BookId;
+
